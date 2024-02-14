@@ -11,3 +11,4 @@
 -GND -------> GND
 -VCC -------> 5V
 ```
+**Use Arfuino Nano**
