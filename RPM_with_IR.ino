@@ -6,6 +6,7 @@ volatile int tick = 0;
 volatile unsigned long time1 = 0;
 volatile unsigned long time2 = 0;
 volatile unsigned long rev = 0;
+float r = 5 //change radius
 
 LiquidCrystal_I2C lcd(0x27, 20, 4);
 
@@ -23,13 +24,17 @@ void loop()
   unsigned long time_diff = time2 - time1;
   float rpm = 0;
   rpm = (1 / (time_diff/  60000.0));
-  //rev =0;
   lcd.setCursor(0, 0);
   lcd.print("RPM is");
   lcd.setCursor(0, 1);
   lcd.print(rpm);
   Serial.println(rpm);
-  delay(200);
+  delay(1000);
+  lcd.setCursor(0, 0);
+  lcd.print("acc(m/s^2) is");
+  lcd.setCursor(0, 1);
+  lcd.print(rpm*3.14*2/60*r); // acceleration
+  delay(1000);
   lcd.clear();
 }
 
