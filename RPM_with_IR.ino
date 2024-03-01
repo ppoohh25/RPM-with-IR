@@ -7,6 +7,8 @@ volatile unsigned long time1 = 0;
 volatile unsigned long time2 = 0;
 volatile unsigned long rev = 0;
 float r = 5; //change radius
+unsigned long time_diff;
+float rpm;
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 void setup()
@@ -20,9 +22,8 @@ void setup()
 
 void loop()
 {
-  unsigned long time_diff = time2 - time1;
-  float rpm = 0;
-  rpm = (1 / (time_diff/  60000.0));
+  
+  
   lcd.setCursor(0, 0);
   lcd.print("RPM is");
   lcd.setCursor(0, 1);
@@ -49,5 +50,7 @@ void REV()
   {
     time2 = millis();
     tick = 0;
+    time_diff = time2 - time1;
+    rpm = (1 / (time_diff/  60000.0));
   }
 }
