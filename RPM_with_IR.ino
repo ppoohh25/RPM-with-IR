@@ -6,9 +6,8 @@ volatile int tick = 0;
 volatile unsigned long time1 = 0;
 volatile unsigned long time2 = 0;
 volatile unsigned long rev = 0;
-float r = 5 //change radius
-
-LiquidCrystal_I2C lcd(0x27, 20, 4);
+float r = 5; //change radius
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 void setup()
 {
@@ -16,7 +15,7 @@ void setup()
   lcd.backlight();
   pinMode(IR_Sensor, INPUT);   /*IR Pin D2 defined as Input*/
   attachInterrupt(digitalPinToInterrupt(IR_Sensor), REV, FALLING); // Change to RISING if IR sensor triggers on rising edge
-  Serial.begin(9600);
+  //Serial.begin(9600);
 }
 
 void loop()
@@ -28,14 +27,14 @@ void loop()
   lcd.print("RPM is");
   lcd.setCursor(0, 1);
   lcd.print(rpm);
-  Serial.println(rpm);
-  delay(1000);
+  //Serial.println(rpm);
+  delay(800);
+  lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("acc(m/s^2) is");
   lcd.setCursor(0, 1);
   lcd.print(rpm*3.14*2/60*r); // acceleration
-  delay(1000);
-  lcd.clear();
+  delay(800);
 }
 
 
@@ -50,6 +49,5 @@ void REV()
   {
     time2 = millis();
     tick = 0;
-    rev++;
   }
 }
